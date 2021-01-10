@@ -35,11 +35,12 @@ class TranslationFilesView(FormView):
                 'spanish': spanish_file.temporary_file_path(),
             }
             for lang, file in file_paths.items():
-                with open(file, 'r') as file_json:
+                with open(file, 'r', encoding='utf-8') as file_json:
                     try:
                         file_content = json.load(file_json)
                     except json.JSONDecodeError as e:
-                        messages.error(request, e.msg)
+                        messages.error(request,
+                                       f'{e.msg} in {lang} file at {e.lineno} line')
                         return self.form_invalid(form)
                     except UnicodeDecodeError:
                         messages.error(request, 'Wrong file(s)')
@@ -94,7 +95,7 @@ def download_file(request):
     lang = request.POST.get('lang')
     qs = Translation.objects.values_list('label__text', lang)
     filename = 'en_us' if lang == 'english' else 'es'
-    transl_data = json.dumps(dict(qs))
+    transl_data = json.dumps(dict(qs), ensure_ascii=False, indent='\t')
     response = HttpResponse(transl_data, content_type='application/json')
     response['Content-Disposition'] = f'attachment; filename="{filename}.json"'
     return response

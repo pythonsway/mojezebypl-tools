@@ -3,5 +3,5 @@ $(function () {
   function closeMsg() {
     $('.alert').alert('close');
   }
-  window.setTimeout(closeMsg, 5000);
+  window.setTimeout(closeMsg, 8000000);
 });
