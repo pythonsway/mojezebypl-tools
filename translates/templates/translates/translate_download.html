@@ -34,7 +34,7 @@ Translate (Save)
                 <div class="py-5">
                     <div class="row mx-3 mt-5 row justify-content-start">
                         <div class="col-sm-3 my-3">
-                            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-info btn-block" role="button">&lArr; Go back</a>
+                            <a href="{% url 'translation-list' %}" class="btn btn-info btn-block" role="button">&lArr; Go back</a>
                         </div>
                     </div>
                     <h4 class="mb-4">Download files</h4>
@@ -44,20 +44,15 @@ Translate (Save)
                             <h6 class="card-subtitle">Number of entries to download: <span class="badge badge-primary">{{ translations_number }}</span></h6>
                         </div>
                         <ul class="list-group list-group-flush">
+                            {% for lang in languages %}
                             <li class="list-group-item">
                                 <form action="{% url 'file-download' %}" method="post">
                                     {% csrf_token %}
-                                    <input type="hidden" id="book" name="lang" value="english">
-                                    <input type="submit" value="English" class="btn btn-success">
+                                    <input type="hidden" id="book" name="lang" value="{{ lang|lower }}">
+                                    <input type="submit" value="{{ lang }}" class="btn btn-success">
                                 </form>
                             </li>
-                            <li class="list-group-item">
-                                <form action="{% url 'file-download' %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" id="book" name="lang" value="spanish">
-                                    <input type="submit" value="Spanish" class="btn btn-success">
-                                </form>
-                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>

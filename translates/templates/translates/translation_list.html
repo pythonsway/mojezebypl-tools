@@ -34,7 +34,7 @@ Translate (Edit)
                 <div class="py-5">
                     <div class="row mx-3 mt-5 row justify-content-between">
                         <div class="col-sm-3 my-3">
-                            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-info btn-block" role="button">&lArr; Go back</a>
+                            <a href="{% url 'translate' %}" class="btn btn-info btn-block" role="button">&lArr; Go back</a>
                         </div>
                         <div class="col-sm-3 my-3">
                             <a href="{% url 'translation-download' %}" class="btn btn-info btn-block" role="button">&rArr; Next</a>

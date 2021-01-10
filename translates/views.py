@@ -86,6 +86,7 @@ def translation_download(request):
     transl_number = Translation.objects.count()
     context = {
         'translations_number': transl_number,
+        'languages': ['English', 'Spanish']
     }
     return render(request, 'translates/translate_download.html', context)
 
