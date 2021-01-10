@@ -1,0 +1,55 @@
+{% extends "translates/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Translate (Upload)
+{% endblock %}
+
+{% block content %}
+
+<section class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col mx-auto">
+                <h2>Translate</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mx-auto">
+                <h3 class="mb-4">Upload files</h3>
+            </div>
+        </div>
+        <div class="row justify-content-around">
+            <ul class="list-group list-group-horizontal-sm">
+                <li class="list-group-item list-group-item-success">Upload files</li>
+                <li class="list-group-item disabled">&rArr;</li>
+                <li class="list-group-item disabled">Edit translations</li>
+                <li class="list-group-item disabled">&rArr;</li>
+                <li class="list-group-item disabled">Save files</li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="py-5">
+                    <h4 class="mb-4">Select files to process</h4>
+                    <p>Upload *.json files with English and Spanish translations to compare.</p>
+                    <div class="card text-white bg-warning mb-3">
+                        <div class="card-header">Warning</div>
+                        <div class="card-body">
+                            <p class="card-text">All the previously saved labels will be overwritten by those read from uploaded files.</p>
+                        </div>
+                    </div>
+                    <form enctype="multipart/form-data" method="post" class="mb-4">
+                        {% csrf_token %}
+                        {% include 'includes/form.html' %}
+                        <button type="submit" class="btn btn-success my-5">Upload</button>
+                        <a href="{% url 'index' %}" class="btn btn-outline-secondary my-5" role="button">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

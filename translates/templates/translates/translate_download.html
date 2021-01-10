@@ -1,0 +1,69 @@
+{% extends "translates/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Translate (Save)
+{% endblock %}
+
+{% block content %}
+
+<section class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col mx-auto">
+                <h2>Translate</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mx-auto">
+                <h3 class="mb-4">Save fils</h3>
+            </div>
+        </div>
+        <div class="row justify-content-around">
+            <ul class="list-group list-group-horizontal-sm">
+                <li class="list-group-item list-group-item-success">Upload files</li>
+                <li class="list-group-item list-group-item-success">&rArr;</li>
+                <li class="list-group-item list-group-item-success">Edit translations</li>
+                <li class="list-group-item list-group-item-success">&rArr;</li>
+                <li class="list-group-item list-group-item-success">Save files</li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col mx-auto">
+                <div class="py-5">
+                    <div class="row mx-3 mt-5 row justify-content-start">
+                        <div class="col-sm-3 my-3">
+                            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-info btn-block" role="button">&lArr; Go back</a>
+                        </div>
+                    </div>
+                    <h4 class="mb-4">Download files</h4>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Get all available translations as *.json file.</h5>
+                            <h6 class="card-subtitle">Number of entries to download: <span class="badge badge-secondary">{{ translations_number }}</span></h6>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <form action="{% url 'file-download' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" id="book" name="lang" value="english">
+                                    <input type="submit" value="English" class="btn btn-success">
+                                </form>
+                            </li>
+                            <li class="list-group-item">
+                                <form action="{% url 'file-download' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" id="book" name="lang" value="spanish">
+                                    <input type="submit" value="Spanish" class="btn btn-success">
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

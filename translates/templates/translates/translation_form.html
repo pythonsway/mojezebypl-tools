@@ -1,0 +1,34 @@
+{% extends "translates/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Translation edit
+{% endblock %}
+
+{% block content %}
+
+<section class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="mb-4">Edit translation</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="py-5">
+                    <h3 class="font-italic mb-4 text-center">"{{ translation.label }}"</h3>
+                    <form method="post" class="mb-4">
+                        {% csrf_token %}
+                        {% include 'includes/form.html' %}
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <a href="{% url 'translation-list' %}" class="btn btn-outline-secondary" role="button">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
