@@ -25,10 +25,10 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 {% with request.resolver_match.url_name as url_name %}
                 <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
                     <li class="nav-item {% if url_name == 'translate' %}active{% endif %}">
                         <a class="nav-link" href="{% url 'translate' %}">Translate</a>
                     </li>
-                    {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ user.username }}

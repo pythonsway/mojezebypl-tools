@@ -19,7 +19,7 @@ def index(request):
     return render(request, 'translates/index.html')
 
 
-class TranslationFilesView(FormView):
+class TranslationFilesView(LoginRequiredMixin, FormView):
     template_name = 'translates/translate_form.html'
     form_class = TranslationFilesForm
     success_url = reverse_lazy('translation-list')
