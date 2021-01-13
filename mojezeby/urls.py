@@ -20,6 +20,7 @@ urlpatterns = [
     path('', include('translates.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
+    # path('django-rq/', include('django_rq.urls')),
 ]
 
 # accounts/login/ [name='login']

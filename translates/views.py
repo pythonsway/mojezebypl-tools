@@ -12,7 +12,8 @@ from django.views.generic import ListView, UpdateView
 from django.views.generic.edit import FormView
 
 from .forms import TranslationFilesForm
-from .models import Label, Translation
+from .models import Translation
+from .tasks import process_files
 
 
 def index(request):
@@ -47,13 +48,7 @@ class TranslationFilesView(LoginRequiredMixin, FormView):
                         return self.form_invalid(form)
                     else:
                         try:
-                            for label, transl in file_content.items():
-                                n_label, label_created = Label.objects.get_or_create(
-                                    text=label)
-                                n_transl, transl_created = Translation.objects.get_or_create(
-                                    label=n_label)
-                                setattr(n_transl, lang, transl)
-                                n_transl.save()
+                            process_files.delay(lang, file_content)
                         except (AttributeError, IndexError, TypeError, KeyError):
                             messages.error(request, 'Broken file(s)')
                             return self.form_invalid(form)

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+    'django_rq',
     'translates.apps.TranslatesConfig',
 ]
 
@@ -131,3 +132,15 @@ STATIC_URL = '/static/'
 FILE_UPLOAD_HANDLERS = [
  "django.core.files.uploadhandler.TemporaryFileUploadHandler",
 ]
+
+# RedisQueue
+RQ_SHOW_ADMIN_LINK = True
+RQ_QUEUES = {
+    'default': {
+        'HOST':  os.getenv('REDIS_URL', 'redis://localhost'),
+        'PORT': 17063,
+        'PASSWORD': os.getenv('REDIS_PSWRD', ''),
+        'DB': 0,
+        'DEFAULT_TIMEOUT': 360,
+    },
+}
