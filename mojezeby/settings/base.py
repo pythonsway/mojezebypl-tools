@@ -134,7 +134,7 @@ FILE_UPLOAD_HANDLERS = [
 ]
 
 # RedisQueue
-RQ_SHOW_ADMIN_LINK = True
+# RQ_SHOW_ADMIN_LINK = True
 RQ_QUEUES = {
     'default': {
         'HOST':  os.getenv('REDIS_URL', 'redis://localhost'),
